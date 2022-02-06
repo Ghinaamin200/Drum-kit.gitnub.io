@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Kit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Drum kit</h1>
+    <div class="keys">
+        <div data-key= "71" class="key">
+            <kbd>G</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "72" class="key">
+            <kbd>H</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "73" class="key">
+            <kbd>I</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "78" class="key">
+            <kbd>N</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "65" class="key">
+            <kbd>A</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "67" class="key">
+            <kbd>C</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "85" class="key">
+            <kbd>U</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "84" class="key">
+            <kbd>T</kbd><span class="sound">
+            kick</span>
+        </div>
+        <div data-key= "69" class="key">
+            <kbd>E</kbd><span class="sound">
+            kick</span>
+        </div>
+    </div>
+    <audio data-key= "71"src="sounds/kick.wav"></audio>
+    <audio data-key= "72"src="sounds/11.wav"></audio>
+    <audio data-key= "73"src="sounds/12.wav"></audio>
+    <audio data-key= "78"src="sounds/bight.wav"></audio>
+    <audio data-key= "65"src="sounds/brw.wav"></audio>
+    <audio data-key= "67"src="sounds/clap.wav"></audio>
+    <audio data-key= "85"src="sounds/deep.wav"></audio>
+    <audio data-key= "84"src="sounds/hit.wav"></audio>
+    <audio data-key= "69"src="sounds/low.wav"></audio>
+   <script>
+       window.addEventListener('keydown',function(e){
+           const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+           const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+           if(!audio) return;
+           audio.currentTime = 0;
+           audio.play();
+           key.classList.add('playing');
+       })
+       function removeTransition(e){
+           if(e.propertyName !== "transform") return;
+           this.classList.remove('playing');
+       }
+       const keys= document.querySelectorAll('.key');
+       keys.forEach(key => key.addEventListener("transitionend",removeTransition));
+   </script> 
+</body>
+</html>
